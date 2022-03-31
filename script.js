@@ -1,10 +1,13 @@
+// localStorage => vai salva locamente no seu navegador 
+//sessionStorage => funciona quando o navegador estiver aberto e quando fecha o navegador perde o historico
 
-function acao (){
-    document.write("Executando...</br>");
+
+var nome = '';
+
+if(typeof localStorage.nome == 'undefined'){
+    localStorage.nome = prompt("Digite seu nome? ");
 }
 
-// Executa de tempo em tempo!
-//setInterval(acao, 1000);
+nome = localStorage.nome;
 
-//Executa e para 
-setTimeout(acao, 3000);
+document.getElementById('nome').innerHTML = nome;
