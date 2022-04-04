@@ -1,27 +1,24 @@
- 
-//includes
-//endsWith
-//startsWith
+//some
+//every
 
-//includes => delvover true ou false
+//some => verifica se tem algum ou alguma 
+/*let nomes = ['Matheus', 'Lucas', 'Douglas',];
 
-/* let nomes = ['Tiago', 'Mateus', 'Douglas' ];
-console.log(nomes.includes('Douglas'));
+console.log(nomes.some(nome => nome === 'Matheus'));
+*/
 
-if(nomes.includes('Joao')){
-    console.log('MATEUS ESTA NA LISTA');
+//every => verifica condicoes posta
 
+let nomes = [
+    {nome: 'Matheus', idade:18},
+    {nome: 'Lucas', idade: 25},
+    {nome:'Tiago', idade:20}
+];
+
+console.log(nomes.every(nome => nome.idade >=14));
+
+if(nomes.every(nome => nome.idade >=18)){
+    console.log('TODOS SÃO MAIORES DE 18');
 }else{
-    console.log('JOAO NÃO ESTA NA LISTA');   
+    console.log('OPS ALGUME É DE MENOR');
 }
-*/
-// endsWith =>  verifica se a palavra termina o que voce esta passando tanto a letra ou uma palavra
-
-/*let nome = 'Tiago';
-console.log(nome.endsWith('o'));
-*/
-//startsWith verifica se a palavra comeca com a que voce esta passando no console
-
-let nome = 'Tiago';
-
-console.log(nome.startsWith('T'));
