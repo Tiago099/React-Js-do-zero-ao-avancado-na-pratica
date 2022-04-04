@@ -1,10 +1,13 @@
-function cadastroPessoa(info){
-    let novosDados = {
-        ...info,
-        cargo:'Programador',
-        status:1,
-        codigo: '45646564646464'
-    };
-    return novosDados;
+
+
+function cadastrar(usuarios, ...novosUsuarios){
+
+    let totalUsuarios = [
+        ...usuarios,
+        ...novosUsuarios
+    ];
+    return console.log(totalUsuarios);
 }
-    console.log(cadastroPessoa({nome: 'Tiago', sobrenome: 'Silva', anoInicio: 2042}));
+let usuarios = ["Tiago", "Joao"];
+
+let novosUsuarios = cadastrar(usuarios, "Pedro", "Maria");
