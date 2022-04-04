@@ -1,13 +1,10 @@
-// localStorage => vai salva locamente no seu navegador 
-//sessionStorage => funciona quando o navegador estiver aberto e quando fecha o navegador perde o historico
-
-
-var nome = '';
-
-if(typeof localStorage.nome == 'undefined'){
-    localStorage.nome = prompt("Digite seu nome? ");
+function cadastroPessoa(info){
+    let novosDados = {
+        ...info,
+        cargo:'Programador',
+        status:1,
+        codigo: '45646564646464'
+    };
+    return novosDados;
 }
-
-nome = localStorage.nome;
-
-document.getElementById('nome').innerHTML = nome;
+    console.log(cadastroPessoa({nome: 'Tiago', sobrenome: 'Silva', anoInicio: 2042}));
