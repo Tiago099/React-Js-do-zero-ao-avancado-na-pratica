@@ -1,47 +1,47 @@
 import React from 'react';
 
-/*component => passar alguma coisa pra ser exibida,tem esses dois tipo
 
-=> const Bemvindo = () => <h2>Bem Vindo(a)</h2>
-
-=> const Bemvindo = () =>{
+const Equipe = (props) =>{
     return(
         <div>
-            <h2>Bem Vindo(a)</h2>
+            <Sobre nome={props.nome} cargo={props.cargo} idade={props.idade}/>
+            <Social fb={props.Facebook}/>
+            <hr/>
+        </div>
+    );
+}
+
+const Sobre =(props) => {
+    return(
+        <div>
+            <h2> Olá sou o(a) {props.nome}</h2>
+            <h3>Sou {props.cargo}</h3>
+            <h4>tenho {props.idade} anos</h4>
         </div>
     )
+}
+const Social = (props) => {
+    return (
+        <div>
+        <a href={props.fb}>Facebook </a>
+        <a>Linkedin </a>
+        <a>Youtube </a>
+        </div>
+    );
 }
 
 function App(){
     return(
         <div>
-            Olá Mundo!
-            <Bemvindo/>
-            <h1> Olá Mundo!</h1>
-        </div>
-    )
-}
-export default App;
-*/
-
-// props => são atributo que passamos pro usuario ver, são propriedades.
-
-
-const Bemvindo = (props) =>{
-    return(
-        <div>
-            <h2>Bem-Vindo(a){props.nome}</h2>
-            <h3>Tenho {props.anos} Anos</h3>
-        </div>
-    )
-}
-
-function App(){
-    return(
-        <div>
-            Olá Mundo!
-            <Bemvindo nome="Tiago" anos = "30"/>
-            <Bemvindo nome="Amanda" anos = "24" />
+            <h1>Conheça nossa equipe:</h1>
+            <Equipe nome="Tiago" cargo="Programador" idade="30"
+                   Facebook="https://google.com"/>
+            <Equipe nome="João" cargo="Designer" idade="35"
+                   Facebook="https://google.com"/>
+            <Equipe nome="Amanda" cargo="Front-end" idade="27"
+                   Facebook="https://google.com"/>
+           
+           
         </div>
     )
 }
