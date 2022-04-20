@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Feed from './Components/Feed';
+
 
 
     
@@ -8,37 +8,47 @@ class App extends Component{
   constructor(props){
     super(props);
     this.state = {
-      feed:[
-        {id: 1, username: 'Joao', curtidas:15, comentarios:3},
-        {id: 2, username: 'Mateus', curtidas:100, comentarios:40},
-        {id: 3, username: 'Tiago', curtidas:250, comentarios:100},
-        {id: 4, username: 'Maria'  , curtidas:50, comentarios:9},
-        {id: 4, username: 'Ireu'  , curtidas:1, comentarios:1},
-      ]
-      
-    
+      email:'teste@teste.com',
+      senha: '123123',
+      sexo: 'masculino'  
     };
 
+    this.trocaEmail = this.trocaEmail.bind(this);
+    this.trocaSexo = this.trocaSexo.bind(this);
+  };
+
+  trocaEmail(e){
+    let valorDigitado = e.target.value;
+    this.setState({email: valorDigitado});
+  };
+
+  trocaSexo(e){
+    let valorDigitado = e.target.value;
+    this.setState({sexo: e.target.valorDigitado});
   }
 
   render(){
       return(
           <div>
+            <h2>Login</h2>
+            Email:
+            <input type="email" name="email" value= {this.state.email}
+                          onChange={this.trocaEmail}/> <br/>
+            Senha:
+            <input type="password"  name="senha" value={this.state.senha}
+                          onChange={(e) => this.setState({senha: e.target.value})}/> <br/>
 
-            {this.state.feed.map((item)=>{
-              return(
-                
-                  <Feed key={item.id} username={item.username}
-                  curtidas={item.curtidas} comentarios={item.comentarios}/>
-          
-              );
-            })}
-          
+            Sexo:
+            <select name= "sexo" value={this.state.sexo} onChange={this.trocaSexo}>
+              <option value="Masculino">Masculino</option>
+              <option value="Feminino">Feminino</option>
+
+            </select>
           </div>    
           
       );
          
-  }
+  };
 
-}
+};
 export default App;
