@@ -1,58 +1,56 @@
 import React, { Component } from 'react';
+import './estilo.css'
+
+import biscoito from './assets/biscoito.png';
 
 class App extends Component{
 
-constructor(props){
-    super(props);
-    this.state = {
-      form:{
-          nome:'',
-          email:'',
-          senha: '',
-          sexo: ''  
+    constructor(props){
+        super(props);
+        this.state = {
+            textoFrase: ''
+        };
+
+        this.quebraBiscoito = this.quebraBiscoito.bind(this);
+
+        this.frases = ['Siga os bons e aprenda com eles.', 'O bom-senso vale mais do que muito conhecimento.', 
+ 'O riso é a menor distância entre duas pessoas.', 
+ 'Deixe de lado as preocupações e seja feliz.',
+ 'Realize o óbvio, pense no improvável e conquiste o impossível.',
+ 'Acredite em milagres, mas não dependa deles.',
+ 'A maior barreira para o sucesso é o medo do fracasso.'];
+
     }
-  };
-  this.dadosForm = this.dadosForm.bind(this);
-};
-dadosForm(e){
-  let form = this.state.form;
-  form[e.target.name] = e.target.value;
-  this.setState({form: form});
+
+    quebraBiscoito(){
+        let state = this.state;
+        let numeroAleatorio = Math.floor(Math.random() * this.frases.length);
+        state.textoFrase = '" ' + this.frases[numeroAleatorio] + ' "'
+        this.setState(state);
+
+    }
+
+    render(){
+        return(
+            <div className="container">
+                <img src={biscoito} className="img" />
+                <Botao nome="Abrir biscoito" acaoBtn={this.quebraBiscoito}/>
+                <h3 className="textoFrase">{this.state.textoFrase}</h3>
+            </div>         
+        );
+    }
 }
 
-
-render(){
-  return(
-      <div>
-        <h2>Login</h2>
-        Nome:
-        <input type="text" name="nome" value={this.state.form.nome}
-                       onChange={this.dadosForm}/><br/>
-        Email:
-        <input type="email" name="email" value= {this.state.form.email}
-                      onChange={this.dadosForm}/> <br/>
-        Senha:
-        <input type="password"  name="senha" value={this.state.form.senha}
-                      onChange={this.dadosForm}/> <br/>
-
-            Sexo:
-            <select name= "sexo" value={this.state.form.sexo} onChange={this.dadosForm}>
-              <option value="Masculino">Masculino</option>
-              <option value="Feminino">Feminino</option>
-
-            </select>
+class Botao extends Component{
+    render(){
+        return(
             <div>
-              <h3>{this.state.form.nome}</h3>
-              <h3>{this.state.form.email}</h3>
-              <h3>{this.state.form.senha}</h3>
-              <h3>{this.state.form.sexo}</h3>
-              
-
+                <button onClick={this.props.acaoBtn} >{this.props.nome}</button>
             </div>
-          </div> 
-   );
- };
-};
+        );
+    }
+}
+
 
 
 export default App;
