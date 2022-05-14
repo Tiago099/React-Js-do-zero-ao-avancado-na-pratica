@@ -2,10 +2,17 @@
     max-width: 800px;
     margin: 14px auto;
 }
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 14px;
+
+}
 
 .lista-filmes article{
     width: 100%;
-    background-color: aliceblue;
+    background-color: #FFFF;
     padding: 15px;
     border-radius: 4px;
 }
@@ -35,7 +42,7 @@ border-top-right-radius: 8px;
     font-size: 24px;
     background-color: #116feb;
     text-decoration: none;
-    color: aliceblue;
+    color: #fff;
     border-bottom-left-radius: 8px;
     border-bottom-right-radius: 8px;
 }
