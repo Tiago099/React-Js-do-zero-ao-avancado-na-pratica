@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './style.css';
 import firebase from './firebaseConnection';
 
@@ -8,6 +8,30 @@ function App() {
   const [titulo, setTitulo] = useState('');
   const [autor, setAutor] = useState('');
   const [post,setPost] = useState([]);
+
+
+  useEffect(()=>{
+    async function loadPost(){
+      await firebase.firestore().collection('post')
+      .onSnapshot((doc)=>{
+        let meusPost =[];
+
+        doc.forEach((item)=>{
+          meusPost.push({
+            id: item.id,
+            titulo: item.data().titulo,
+            autor: item.data().autor,
+          })
+        });
+
+        setPost(meusPost);
+
+      })
+    }
+  
+  loadPost();
+
+  },[]);
 
   async function handleAdd(){
 
