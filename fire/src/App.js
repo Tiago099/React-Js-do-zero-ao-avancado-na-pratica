@@ -128,7 +128,15 @@ async function editarPost(){
   })
   .catch(()=>{
     console.log('ERRO AO ATUALIZAR');
-  })
+  });
+
+  }
+  async function excluirPost(id){
+    await firebase.firestore().collection('post').doc(id)
+    .delete()
+    .then(()=>{
+      alert('ESSE POST FOI EXCLUIDO!')
+    })
 
   }
 
@@ -157,7 +165,8 @@ async function editarPost(){
            <li key={post.id}>
              <span>ID - {post.id}</span> <br/>
              <span>Titulo: {post.titulo} </span> <br/>
-             <span>Autor: {post.autor} </span> <br/> <br/>
+             <span>Autor: {post.autor} </span> <br/> 
+             <button onClick={()=> excluirPost(post.id)} >Excluir post</button> <br/> <br/>
 
            </li>
          )
