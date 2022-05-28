@@ -13,6 +13,8 @@ function App() {
 
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const [user, setUser] = useState(false);
+  const [userLogged, setUserLogged] = useState({});
 
 
   useEffect(()=>{
@@ -35,6 +37,32 @@ function App() {
     }
   
   loadPost();
+
+  },[]);
+
+
+  useEffect(() =>{
+
+    async function checkLogin(){
+      await firebase.auth().onAuthStateChanged((user)=>{
+        if(user){
+          setUser(true);
+          setUserLogged({
+            uid: user.uid,
+            email: user.email
+          })
+          //se tem usuario logado entra aqui dentro...
+        }else{
+          //nao possui nenhum user logado..
+          setUser(false);
+          setUserLogged({});
+        }
+      })
+
+    }
+
+    checkLogin();
+
 
   },[]);
 
@@ -160,10 +188,36 @@ async function editarPost(){
    
 
   }
+  async function logout(){
+    await firebase.auth().signOut();
+  }
+
+  async function fazerLogin(){
+    await firebase.auth().signInWithEmailAndPassword(email, senha)
+    .then((value)=>{
+      console.log(value.user);
+
+    })
+    .catch((error)=>{
+      console.log('ERRO AO FAZER O LOGIN' + error);
+    })
+    
+    
+  }
 
   return (
     <div>
      <h1> ReactJs + Firebase :)</h1> <br/>
+     
+     {user && (
+       <div>
+         <strong>Seja bem vindo! (você está logado!)</strong> <br/>
+         <span>{userLogged.uid} - {userLogged.email}</span>
+         <br/> <br/>
+
+
+      </div>
+     )}
 
 
      <div className='container'>
@@ -173,7 +227,9 @@ async function editarPost(){
        <label>senha</label>
        <input type="password" value={senha} onChange={ (e) => setSenha(e.target.value) }/> <br/>
 
+       <button onClick={ fazerLogin }>Fazer Login</button>
        <button onClick={ novoUsuario }>Cadastrar</button>
+       <button onClick={ logout }>Sair da conta</button>
      </div>
 
      <hr/> <br/>
