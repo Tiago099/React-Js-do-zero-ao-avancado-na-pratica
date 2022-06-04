@@ -10,7 +10,7 @@ import { FiHome, FiUser, FiSettings } from "react-icons/fi";
 export default function Header(){
     const { user } = useContext(AuthContext);
     return(
-        <div className='sidebar'>
+        <div className="sidebar">
           <div>
             <img src={user.avatarUrl === null ? avatar : user.avatarUrl } alt="foto avatar"/>
           </div>

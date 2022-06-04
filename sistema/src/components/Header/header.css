@@ -1,3 +1,4 @@
+
 .sidebar{
     margin: 0;
     padding: 0;
@@ -8,7 +9,7 @@
     overflow: auto;
 }
 .sidebar div{
-    background: url('../../assets/cover.png');
+    background: url ('../../assets/cover.png');
     background-color: #181C2e;
     background-position: center;
     background-repeat: no-repeat;
@@ -50,14 +51,14 @@
    padding: 1px 16px;
 }
 /* resolução para celular*/
-@media screen and(max-width:700px) {
+@media screen and (max-width:700px){
 .sidebar{
     width: 100%;
     height: auto;
     position: relative;
 }
 
-div.content{
+.content div{
     margin-left:  0;
 }
 .sidebar a {
@@ -65,15 +66,15 @@ div.content{
 
 }
 .sidebar div{
-    display: none;
+    display:none
 
 }
 .sidebar a svg{
-    display: none;
+    display:none
 }
     
 }
-@media screen and(max-width:400px) {
+@media screen and (max-width:400px) {
     .sidebar a{
         text-align: center;
         float:  none;
