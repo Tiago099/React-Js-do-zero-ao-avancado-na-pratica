@@ -9,7 +9,7 @@
     overflow: auto;
 }
 .sidebar div{
-    background: url ('../../assets/cover.png');
+    background: url('../../assets/cover.png');
     background-color: #181C2e;
     background-position: center;
     background-repeat: no-repeat;
