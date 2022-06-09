@@ -36,7 +36,7 @@ export default function Dashboard(){
             updateState(snapshot)
         })
         .catch((err)=>{
-            console.log('Deu algum err: ', err);
+            console.log('Deu algum erro: ', err);
             setLoadingMore(false);
         })
         setLoading(false);
@@ -71,8 +71,32 @@ export default function Dashboard(){
         setLoadingMore(false);
 
     }
-   
-     
+   async function handleMore(){
+        setLoadingMore(true);
+        await listRef.startAfter(lastDocs).limit(5)
+        .get()
+        .then((snapshot)=>{
+         updateState(snapshot)
+        })
+    }
+
+    if(loading){
+        return(
+            <div>
+                <Header/>
+
+                <div className="content">
+                    <Title name="Atendimento">
+                        <FiMessageSquare size={25}/>
+                    </Title>
+
+                    <div className="container dasboard">
+                        <span>Buscando chamados...</span>
+                    </div>
+                </div>
+            </div>
+        )
+    }   
     return(
         <div>
             <Header/>
@@ -108,12 +132,15 @@ export default function Dashboard(){
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td data-label="Cliente">Sujeito</td>
-                            <td data-label="Assunto">Suporte</td>
+                        {chamados.map((item, index)=>{
+                        return(
+                         <tr key={ index }>
+                            <td data-label="Cliente">{item.cliente}</td>
+                            <td data-label="Assunto">{item.assunto}</td>
                             <td data-label="Status">
-                              <span className='badge' style={{backgroundColor:'#5cb85c'}}>Em aberto</span>
+                            <span className='badge' style={{ backgroundColor: item.status === 'Aberto' ? '#5cb85c' : '#999' }}>{item.status}</span>
                             </td>
+                            <td data-label="Cadastrado">{item.createdFormated}</td>
                             <td data-label="#">
                                 <button className='action' style={{backgroundColor: '#3583f6'}}>
                                 <FiSearch color="#FFFF" size={17} />
@@ -122,11 +149,16 @@ export default function Dashboard(){
                                     <FiEdit2 color="#FFFF" size={17}/>
                                 </button>
                                 </td>  
-                        </tr>
+                            </tr>
+                         )
+                     })}
+                       
                     </tbody>
-                </table>
-                 </>
-             )}
+                   </table>
+                   {loadingMore && <h3 style={{textAlign: 'center', marginTop: 15}}>Buscando dados...</h3>}
+                   {!loadingMore && !isEmpty && <button className="btn-more" onClick={handleMore}>Buscar mais</button>}
+                   </>
+                 )}
                 
             </div> 
         </div>
