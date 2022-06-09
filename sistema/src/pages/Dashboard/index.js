@@ -2,12 +2,14 @@
 import './dashboard.css';
 import { useState, useEffect } from 'react';
 
-import Title from '../../components/Title';
 import Header from '../../components/Header';
+import Title from '../../components/Title';
 import {FiMessageSquare, FiPlus, FiSearch, FiEdit2} from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import firebase from '../../services/firebaseConnection';
 import { format } from 'date-fns';
+
+import firebase from '../../services/firebaseConnection';
+import Modal from '../../components/Modal';
 
 const listRef = firebase.firestore().collection('chamados').orderBy('created', 'desc');
 
@@ -18,9 +20,25 @@ export default function Dashboard(){
     const [isEmpty, setIsEmpty] = useState(false);
     const [lastDocs, setLastDocs] = useState();
 
+    const [showPostModal, setShowPostModal] = useState(false);
+    const [detail, setDetail] = useState();
+
 
 
     useEffect(()=>{
+
+        async function loadChamados(){
+            await listRef.limit(5)
+            .get()
+            .then((snapshot)=>{
+                updateState(snapshot)
+            })
+            .catch((err)=>{
+                console.log('Deu algum erro: ', err);
+                setLoadingMore(false);
+            })
+            setLoading(false);
+        }
 
         loadChamados();
 
@@ -29,18 +47,7 @@ export default function Dashboard(){
         }
     }, []);
 
-    async function loadChamados(){
-        await listRef.limit(5)
-        .get()
-        .then((snapshot)=>{
-            updateState(snapshot)
-        })
-        .catch((err)=>{
-            console.log('Deu algum erro: ', err);
-            setLoadingMore(false);
-        })
-        setLoading(false);
-    }
+   
 
     async function updateState(snapshot){
         const isCollectionEmpty = snapshot.size === 0;
@@ -78,6 +85,11 @@ export default function Dashboard(){
         .then((snapshot)=>{
          updateState(snapshot)
         })
+    }
+
+    function togglePostModal(item){
+       setShowPostModal(!showPostModal) //trocando de true pra false
+       setDetail(item);
     }
 
     if(loading){
@@ -134,7 +146,7 @@ export default function Dashboard(){
                     <tbody>
                         {chamados.map((item, index)=>{
                         return(
-                         <tr key={ index }>
+                         <tr key={index}>
                             <td data-label="Cliente">{item.cliente}</td>
                             <td data-label="Assunto">{item.assunto}</td>
                             <td data-label="Status">
@@ -142,7 +154,7 @@ export default function Dashboard(){
                             </td>
                             <td data-label="Cadastrado">{item.createdFormated}</td>
                             <td data-label="#">
-                                <button className='action' style={{backgroundColor: '#3583f6'}}>
+                                <button className='action' style={{backgroundColor: '#3583f6'}} onClick={ () => togglePostModal(item)}>
                                 <FiSearch color="#FFFF" size={17} />
                                 </button>
                                 <button className='action' style={{backgroundColor: '#F6a935'}}>
@@ -161,6 +173,12 @@ export default function Dashboard(){
                  )}
                 
             </div> 
+            {showPostModal && (
+                <Modal
+                conteudo={detail}
+                close={togglePostModal}
+                />
+            )}
         </div>
     )
 }
