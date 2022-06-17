@@ -1,9 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../../assets/logo.svg';
+
+import  './style.css';
 
 export default function Header() {
  return (
-   <div>
-     <h1>Header...</h1>
-   </div>
+  <header className='container'>
+
+    <Link to="/">
+       <img className='logo' src={logo} alt="Logo Projeto"/>
+    </Link>
+
+    <Link className='reservas' to="/reservas">
+      <di>
+        <strong>Minhas reservas</strong>
+        <span>3 reservas</span>
+      </di>
+
+    </Link>
+  </header>
+   
  );
 }
