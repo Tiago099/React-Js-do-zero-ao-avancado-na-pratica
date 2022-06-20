@@ -13,10 +13,10 @@ export default function Header() {
     </Link>
 
     <Link className='reservas' to="/reservas">
-      <di>
+      <div>
         <strong>Minhas reservas</strong>
         <span>3 reservas</span>
-      </di>
+      </div>
 
     </Link>
   </header>
