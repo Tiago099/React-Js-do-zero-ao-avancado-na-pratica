@@ -11,24 +11,24 @@
     max-height: 110px;
 
 }
-.reservas{
+.reserva{
     display: flex;
     align-items: center;
     text-decoration: none;
 
 }
-.reservas div{
+.reserva div{
     text-align: right;
     margin-right: 10px;
 
 }
 
-.reservas strong{
+.reserva strong{
     color: #FFF;
     display: block;
 }
 
-.reservas span{
+.reserva span{
     color: #DDD;
     font-size: 15px;
     margin-left: 58px;

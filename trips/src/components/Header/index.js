@@ -12,7 +12,7 @@ export default function Header() {
        <img className='logo' src={logo} alt="Logo Projeto"/>
     </Link>
 
-    <Link className='reservas' to="/reservas">
+    <Link className='reserva' to="/reserva">
       <div>
         <strong>Minhas reservas</strong>
         <span>3 reservas</span>
