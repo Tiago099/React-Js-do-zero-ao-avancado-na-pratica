@@ -4,7 +4,7 @@ export default function reserve(state = [], action ){
   
   
   switch(action.type){
-    case 'ADD_RESERVE':
+    case 'ADD_RESERVE_SUCCESS':
       return produce(state, draft =>{
         const tripIndex = draft.findIndex(trip => trip.id === action.trip.id);
 
