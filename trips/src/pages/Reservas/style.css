@@ -32,7 +32,7 @@ footer button{
 }
 
 .reservas #amount{
-  display:flex;
+  display: flex;
   align-items: center;
 }
 
@@ -42,4 +42,5 @@ footer button{
   color: #242424;
   padding: 5px;
   width: 45px;
+
 }
